@@ -1,0 +1,82 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: maqcode
+  name: 快馬
+  version: "1.0"
+  author:
+    - Original CIN table
+  description: |
+    快馬輸入法 (MQcode)
+    Converted from .cin format to RIME
+  dependencies:
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: simplification
+    states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - selector
+    - punctuator
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz0123456789',-./;<=>[\\]`"
+  delimiter: " "
+  max_code_length: 4
+  auto_select: false
+
+translator:
+  dictionary: maqcode
+  enable_charset_filter: false
+  enable_sentence: false
+  enable_encoder: false
+  encode_commit_history: false
+  max_phrase_length: 1
+  enable_user_dict: true
+
+ascii_composer:
+  good_old_caps_lock: true
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  bindings:
+    - { when: composing, accept: "Tab", send: Page_Down }
+    - { when: composing, accept: "Shift+Tab", send: Page_Up }
+
+recognizer:
+  patterns: {}
+
+menu:
+  page_size: 9
+
+style:
+  keyboard: maqcode
