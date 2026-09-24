@@ -10,6 +10,10 @@ patch:
   "preset_keys/cn_semi":   {label: '；', commit: '；'}
   "preset_keys/cn_dash":   {label: '——', commit: '——'}
 
+  # 鍵盤切換鍵（Trime 需要明確定義 select 動作）
+  "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
+  "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
+
   # ==============================
   # 快馬主鍵盤
   # ==============================

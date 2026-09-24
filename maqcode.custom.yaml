@@ -1,0 +1,17 @@
+# 快馬：上屏聯想（librime-predict）
+# 需要同一資料夾內有 predict-zht.db（繁體聯想詞庫，來源：kenspc/rime-predict-zh，GPL-3.0）
+# 不想用時，刪除本檔案並重新部署即可，maqcode.schema.yaml 本身不用改。
+
+patch:
+  # 把聯想處理器與翻譯器放在最前面
+  "engine/processors/@before 0": predictor
+  "engine/translators/@before 0": predict_translator
+
+  # 聯想開關（predictor 只在 prediction 開啟時運作，reset: 1 = 預設開啟）
+  "switches/+":
+    - { name: prediction, states: [ 無聯想, 聯想 ], reset: 1 }
+
+  predictor:
+    db: predict-zht.db
+    max_candidates: 6    # 最多顯示 6 個聯想
+    max_iterations: 1    # 選了一個聯想後就停，不連續聯想
