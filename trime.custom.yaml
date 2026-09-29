@@ -27,12 +27,25 @@ patch:
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
 
-  # EN 鍵：用 toggle: ascii_mode 走 handleSwitchCharset 路徑
-  # - composing 狀態：handleSwitchCharset 內建會 commitText 後 clearComposition
-  # - has_menu 狀態：key_binder 先送 Escape 清除候選字，再由 handleSwitchCharset 切換
-  # - 鍵盤切換由 select: maqcode_en 處理（跟 send 無關）
-  "preset_keys/SwitchToEn": {label: 'EN', toggle: ascii_mode, select: maqcode_en}
-  "preset_keys/SwitchToZh": {label: '中', toggle: ascii_mode, select: maqcode}
+  # EN/中 鍵：
+  # - send: Mode_switch 設定 code = KEYCODE_SWITCH_CHARSET，走 handleSwitchCharset 路徑
+  # - toggle: ascii_mode 提供 option 名稱給 handleSwitchCharset 執行
+  # - select: maqcode_en / maqcode 切換鍵盤
+  # - states 讓鍵盤標籤隨 ascii_mode 變化顯示
+  # handleSwitchCharset 內建在 composing 時會 commit 後 clear；
+  # has_menu 狀態由 key_binder 的 Escape 先清除
+  "preset_keys/SwitchToEn":
+    label: 'EN'
+    send: Mode_switch
+    toggle: ascii_mode
+    select: maqcode_en
+    states: [ 'EN', '中' ]
+  "preset_keys/SwitchToZh":
+    label: '中'
+    send: Mode_switch
+    toggle: ascii_mode
+    select: maqcode
+    states: [ 'EN', '中' ]
 
   # ==============================
   # 快馬主鍵盤（中文模式）
