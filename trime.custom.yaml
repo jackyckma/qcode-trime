@@ -1,7 +1,7 @@
 patch:
   # ==============================
   # 自訂按鍵（直接上屏的中文標點）
-  # 全部使用 commit，確保上屏前清除 preedit（避免聯想字跟著一起上屏）
+  # 全部使用 commit，確保上屏前清除 preedit
   # ==============================
   "preset_keys/cn_comma":   {label: '，', commit: '，'}
   "preset_keys/cn_period":  {label: '。', commit: '。'}
@@ -27,9 +27,13 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
+  # EN 鍵：切換到英文鍵盤（ascii_mode: 1）
+  # 走 select: 路徑，3.3.9 已修正會先 commit preedit 再切換
+  "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
+  "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
 
   # ==============================
-  # 快馬主鍵盤
+  # 快馬主鍵盤（中文模式）
   # ==============================
   "preset_keyboards/maqcode":
     name: 快馬
@@ -39,7 +43,6 @@ patch:
     width: 9
     lock: true
     keys:
-      # 行1：` + 數字（11鍵）
       - {click: '`'}
       - {click: '1'}
       - {click: '2'}
@@ -51,8 +54,6 @@ patch:
       - {click: '8'}
       - {click: '9'}
       - {click: '0', width: 10}
-
-      # 行2：QWERTYUIOP + -（長按=）
       - {click: q}
       - {click: w}
       - {click: e}
@@ -64,8 +65,6 @@ patch:
       - {click: o}
       - {click: p}
       - {click: '-', long_click: '=', hint: '=', width: 10}
-
-      # 行3：ASDFGHJKL + ; + '
       - {click: a}
       - {click: s}
       - {click: d}
@@ -77,8 +76,6 @@ patch:
       - {click: l}
       - {click: ';'}
       - {click: "'", width: 10}
-
-      # 行4：ZXCVBNM + /（長按，）+ \（長按。）+ [ + ]
       - {click: z}
       - {click: x}
       - {click: c}
@@ -90,19 +87,80 @@ patch:
       - {click: '\', long_click: cn_period, hint: '。'}
       - {click: '['}
       - {click: ']', width: 10}
-
-      # 行5：功能列
       - {click: Escape, label: 'ESC', width: 12}
       - {click: liquid_keyboard_emoji, label: '😊', width: 13}
       - {click: Keyboard_maqcodepunct, label: '符', width: 13}
       - {click: space, label: ' ', width: 30}
       - {click: Return, label: '↵', width: 12}
       - {click: BackSpace, label: '⌫', width: 10}
-      - {click: Mode_switch, label: 'EN', width: 10}
+      - {click: SwitchToEn, width: 10}
+
+  # ==============================
+  # 快馬英文鍵盤（ascii_mode: 1）
+  # 與中文鍵盤相同布局，但是 ascii_mode = 1，按鍵直出 app
+  # ==============================
+  "preset_keyboards/maqcode_en":
+    name: 快馬 EN
+    author: maqcode custom
+    ascii_mode: 1
+    height: 46
+    width: 9
+    lock: true
+    keys:
+      - {click: '`'}
+      - {click: '1'}
+      - {click: '2'}
+      - {click: '3'}
+      - {click: '4'}
+      - {click: '5'}
+      - {click: '6'}
+      - {click: '7'}
+      - {click: '8'}
+      - {click: '9'}
+      - {click: '0', width: 10}
+      - {click: q}
+      - {click: w}
+      - {click: e}
+      - {click: r}
+      - {click: t}
+      - {click: y}
+      - {click: u}
+      - {click: i}
+      - {click: o}
+      - {click: p}
+      - {click: '-', width: 10}
+      - {click: a}
+      - {click: s}
+      - {click: d}
+      - {click: f}
+      - {click: g}
+      - {click: h}
+      - {click: j}
+      - {click: k}
+      - {click: l}
+      - {click: ';'}
+      - {click: "'", width: 10}
+      - {click: z}
+      - {click: x}
+      - {click: c}
+      - {click: v}
+      - {click: b}
+      - {click: n}
+      - {click: m}
+      - {click: '/'}
+      - {click: '\'}
+      - {click: '['}
+      - {click: ']', width: 10}
+      - {click: Escape, label: 'ESC', width: 12}
+      - {click: liquid_keyboard_emoji, label: '😊', width: 13}
+      - {click: Keyboard_maqcodepunct, label: '符', width: 13}
+      - {click: space, label: ' ', width: 30}
+      - {click: Return, label: '↵', width: 12}
+      - {click: BackSpace, label: '⌫', width: 10}
+      - {click: SwitchToZh, width: 10}
 
   # ==============================
   # 快馬符號鍵盤
-  # 全部引用 preset_keys（commit 方式），確保清除 preedit 後再上屏
   # ==============================
   "preset_keyboards/maqcodepunct":
     name: 快馬符號
@@ -112,31 +170,26 @@ patch:
     width: 20
     lock: false
     keys:
-      # 行1：常用標點
       - {click: cn_comma,  width: 20}
       - {click: cn_period, width: 20}
       - {click: cn_excl,   width: 20}
       - {click: cn_quest,  width: 20}
       - {click: cn_enum,   width: 20}
-      # 行2：引號類
       - {click: cn_lquot1, width: 20}
       - {click: cn_rquot1, width: 20}
       - {click: cn_lquot2, width: 20}
       - {click: cn_rquot2, width: 20}
       - {click: cn_ellip,  width: 20}
-      # 行3：書名號
       - {click: cn_langle1, width: 20}
       - {click: cn_rangle1, width: 20}
       - {click: cn_langle2, width: 20}
       - {click: cn_rangle2, width: 20}
       - {click: cn_mdot,    width: 20}
-      # 行4：括號、冒號、分號、破折號
       - {click: cn_lparen, width: 20}
       - {click: cn_rparen, width: 20}
       - {click: cn_colon,  width: 20}
       - {click: cn_semi,   width: 20}
       - {click: cn_dash,   width: 20}
-      # 行5：功能列
       - {click: Keyboard_maqcode, label: '返回', width: 40}
       - {click: space, label: ' ', width: 30}
       - {click: BackSpace, label: '⌫', width: 30}
