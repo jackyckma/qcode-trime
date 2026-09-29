@@ -26,13 +26,14 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-  # EN / 中 鍵：只用 select 切換鍵盤
-  # preedit 清除由 maqcode.schema.yaml 的 ascii_composer/switch_key/Eisu_toggle: clear 處理
-  "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
-  "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
+
+  # EN 鍵：只用 Mode_switch
+  # preedit 清除由 maqcode.schema.yaml ascii_composer/switch_key/Eisu_toggle: clear 處理
+  # 切換後仸留在同一快馬鍵盤，鍵盤標籤改為「西文」
+  "preset_keys/SwitchMode": {label: 'EN', send: Mode_switch}
 
   # ==============================
-  # 快馬主鍵盤（中文模式）
+  # 快馬主鍵盤（唯一一個鍵盤）
   # ==============================
   "preset_keyboards/maqcode":
     name: 快馬
@@ -92,70 +93,7 @@ patch:
       - {click: space, label: ' ', width: 30}
       - {click: Return, label: '↵', width: 12}
       - {click: BackSpace, label: '⌫', width: 10}
-      - {click: SwitchToEn, width: 10}
-
-  # ==============================
-  # 快馬英文鍵盤（ascii_mode: 1）
-  # ==============================
-  "preset_keyboards/maqcode_en":
-    name: 快馬 EN
-    author: maqcode custom
-    ascii_mode: 1
-    height: 46
-    width: 9
-    lock: true
-    keys:
-      - {click: '`'}
-      - {click: '1'}
-      - {click: '2'}
-      - {click: '3'}
-      - {click: '4'}
-      - {click: '5'}
-      - {click: '6'}
-      - {click: '7'}
-      - {click: '8'}
-      - {click: '9'}
-      - {click: '0', width: 10}
-      - {click: q}
-      - {click: w}
-      - {click: e}
-      - {click: r}
-      - {click: t}
-      - {click: y}
-      - {click: u}
-      - {click: i}
-      - {click: o}
-      - {click: p}
-      - {click: '-', width: 10}
-      - {click: a}
-      - {click: s}
-      - {click: d}
-      - {click: f}
-      - {click: g}
-      - {click: h}
-      - {click: j}
-      - {click: k}
-      - {click: l}
-      - {click: ';'}
-      - {click: "'", width: 10}
-      - {click: z}
-      - {click: x}
-      - {click: c}
-      - {click: v}
-      - {click: b}
-      - {click: n}
-      - {click: m}
-      - {click: '/'}
-      - {click: '\'}
-      - {click: '['}
-      - {click: ']', width: 10}
-      - {click: Escape, label: 'ESC', width: 12}
-      - {click: liquid_keyboard_emoji, label: '😊', width: 13}
-      - {click: Keyboard_maqcodepunct, label: '符', width: 13}
-      - {click: space, label: ' ', width: 30}
-      - {click: Return, label: '↵', width: 12}
-      - {click: BackSpace, label: '⌫', width: 10}
-      - {click: SwitchToZh, width: 10}
+      - {click: SwitchMode, width: 10}
 
   # ==============================
   # 快馬符號鍵盤
