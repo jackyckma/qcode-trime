@@ -63,6 +63,10 @@ translator:
 
 ascii_composer:
   good_old_caps_lock: true
+  switch_key:
+    Eisu_toggle:
+      when: composing
+      action: commit_text  # 先上屏當前 preedit，再切換 ascii_mode
 
 punctuator:
   import_preset: default
