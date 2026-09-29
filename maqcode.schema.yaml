@@ -64,9 +64,7 @@ translator:
 ascii_composer:
   good_old_caps_lock: true
   switch_key:
-    Eisu_toggle:
-      when: composing
-      action: commit_text  # 先上屏當前 preedit，再切換 ascii_mode
+    Eisu_toggle: clear  # 按 EN 鍵時，先清除 preedit（不上屏），再切換 ascii_mode
 
 punctuator:
   import_preset: default
