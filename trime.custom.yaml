@@ -1,7 +1,6 @@
 patch:
   # ==============================
   # 自訂按鍵（直接上屏的中文標點）
-  # 全部使用 commit，確保上屏前清除 preedit
   # ==============================
   "preset_keys/cn_comma":   {label: '，', commit: '，'}
   "preset_keys/cn_period":  {label: '。', commit: '。'}
@@ -27,9 +26,9 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-  # EN 鍵：切換到英文鍵盤（ascii_mode: 1）
-  # 走 select: 路徑，3.3.9 已修正會先 commit preedit 再切換
-  "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
+  # EN 鍵：先送 Escape 清除 preedit，再切換到英文鍵盤
+  # 英文鍵盤本身已是 ascii_mode: 1，不需要再送 Eisu_toggle
+  "preset_keys/SwitchToEn": {label: 'EN', send: Escape, select: maqcode_en}
   "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
 
   # ==============================
@@ -97,7 +96,6 @@ patch:
 
   # ==============================
   # 快馬英文鍵盤（ascii_mode: 1）
-  # 與中文鍵盤相同布局，但是 ascii_mode = 1，按鍵直出 app
   # ==============================
   "preset_keyboards/maqcode_en":
     name: 快馬 EN
