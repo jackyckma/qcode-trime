@@ -26,9 +26,13 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-  # EN 鍵：送 Eisu_toggle 觸發 key_binder 裡的 Escape，清除 preedit後再切換鍵盤
-  "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
-  "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
+
+  # EN 鍵：用 toggle: ascii_mode 走 handleSwitchCharset 路徑
+  # - composing 狀態：handleSwitchCharset 內建會 commitText 後 clearComposition
+  # - has_menu 狀態：key_binder 先送 Escape 清除候選字，再由 handleSwitchCharset 切換
+  # - 鍵盤切換由 select: maqcode_en 處理（跟 send 無關）
+  "preset_keys/SwitchToEn": {label: 'EN', toggle: ascii_mode, select: maqcode_en}
+  "preset_keys/SwitchToZh": {label: '中', toggle: ascii_mode, select: maqcode}
 
   # ==============================
   # 快馬主鍵盤（中文模式）
