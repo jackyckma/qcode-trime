@@ -71,9 +71,16 @@ key_binder:
   bindings:
     - { when: composing, accept: "Tab", send: Page_Down }
     - { when: composing, accept: "Shift+Tab", send: Page_Up }
-    # 有候選字時按 EN（Switch_charset），先送 Escape 清除候選字
-    # composing 狀態由 handleSwitchCharset 內建處理，不需要這裡放
-    - { when: has_menu, accept: Switch_charset, send: Escape }
+    # 有 preedit 或候選字時按 EN（Eisu_toggle 由 Trime 層已被拦截，不進入 RIME）
+    # 改括捨任一能進入 RIME 引擎的鍵，用 set_option 觸發 _key_ 機制先送 Escape
+    # 然後 Trime 的 Eisu_toggle -> switchKeyboard 再切換鍵盤
+    # 但這這不行因為 Eisu_toggle 到不了 key_binder...
+    # 直接用 has_menu 和 composing 鍵盤層的 Escape 鍵來先清除狀態
+    # 但這次我們用不同的方式：在鍵盤按下 EN 時，鍵盤層接收到
+    # Eisu_toggle，先由 KeyboardWindow.switchKeyboard 切換到 maqcode_en。
+    # attachKeyboard 內的 commitComposition() 會先 commit 候選字再切换 ascii_mode。
+    # 這個 commit 是目前最接近的可行行為。
+    # has_menu 候選字的 clear 屬於 predictoroff 問題，由候選字清除後再處理。
 
 recognizer:
   patterns: {}
