@@ -26,10 +26,10 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-  # EN 鍵：先送 Escape 清除 preedit，再切換到英文鍵盤
-  # 英文鍵盤本身已是 ascii_mode: 1，不需要再送 Eisu_toggle
-  "preset_keys/SwitchToEn": {label: 'EN', send: Escape, select: maqcode_en}
-  "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
+  # EN 鍵：切換到英文鍵盤，同時關閉聯想以清除 pending 狀態
+  "preset_keys/SwitchToEn": {label: 'EN', toggle: prediction, select: maqcode_en}
+  # 中鍵：切回中文鍵盤，同時開啟聯想
+  "preset_keys/SwitchToZh": {label: '中', toggle: prediction, select: maqcode}
 
   # ==============================
   # 快馬主鍵盤（中文模式）
