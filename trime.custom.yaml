@@ -26,21 +26,18 @@ patch:
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-
-  # EN 鍵：只用 text 送 Escape + Eisu_toggle
-  # 不再嘗試 select，改用鍵盤自身的 ascii_keyboard 自動切換
-  "preset_keys/SwitchToEn": {label: 'EN', text: "{Escape}{Eisu_toggle}"}
-  "preset_keys/SwitchToZh": {label: '中', text: "{Eisu_toggle}"}
+  # EN / 中 鍵：只用 select 切換鍵盤
+  # preedit 清除由 maqcode.schema.yaml 的 ascii_composer/switch_key/Eisu_toggle: clear 處理
+  "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
+  "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
 
   # ==============================
   # 快馬主鍵盤（中文模式）
-  # ascii_keyboard 指定切成英文模式時自動跳轉的鍵盤
   # ==============================
   "preset_keyboards/maqcode":
     name: 快馬
     author: maqcode custom
     ascii_mode: 0
-    ascii_keyboard: maqcode_en
     height: 46
     width: 9
     lock: true
