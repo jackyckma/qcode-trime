@@ -24,7 +24,6 @@ patch:
   "preset_keys/cn_dash":    {label: '——', commit: '——'}
 
   # 長按字母直接輸出英文（commit 會先清除 preedit 再輸出）
-  # 只在主鍵盤定義，英文鍵盤不需要
   "preset_keys/la": {label: 'a', commit: 'a'}
   "preset_keys/lb": {label: 'b', commit: 'b'}
   "preset_keys/lc": {label: 'c', commit: 'c'}
@@ -60,13 +59,12 @@ patch:
 
   # ==============================
   # 快馬主鍵盤（中文模式）
-  # 長按字母 → 直接輸出英文小寫（commit 清除 preedit 後上屏）
+  # 長按字母 → 直接輸出英文小寫
   # ==============================
   "preset_keyboards/maqcode":
     name: 快馬
     author: maqcode custom
     ascii_mode: 0
-    reset_ascii_mode: true
     height: 46
     width: 9
     lock: true
@@ -130,7 +128,6 @@ patch:
     name: 快馬 EN
     author: maqcode custom
     ascii_mode: 1
-    reset_ascii_mode: true
     height: 46
     width: 9
     lock: true
