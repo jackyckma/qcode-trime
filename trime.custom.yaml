@@ -23,19 +23,44 @@ patch:
   "preset_keys/cn_semi":    {label: '；', commit: '；'}
   "preset_keys/cn_dash":    {label: '——', commit: '——'}
 
+  # 長按字母直接輸出英文（commit 會先清除 preedit 再輸出）
+  # 只在主鍵盤定義，英文鍵盤不需要
+  "preset_keys/la": {label: 'a', commit: 'a'}
+  "preset_keys/lb": {label: 'b', commit: 'b'}
+  "preset_keys/lc": {label: 'c', commit: 'c'}
+  "preset_keys/ld": {label: 'd', commit: 'd'}
+  "preset_keys/le": {label: 'e', commit: 'e'}
+  "preset_keys/lf": {label: 'f', commit: 'f'}
+  "preset_keys/lg": {label: 'g', commit: 'g'}
+  "preset_keys/lh": {label: 'h', commit: 'h'}
+  "preset_keys/li": {label: 'i', commit: 'i'}
+  "preset_keys/lj": {label: 'j', commit: 'j'}
+  "preset_keys/lk": {label: 'k', commit: 'k'}
+  "preset_keys/ll": {label: 'l', commit: 'l'}
+  "preset_keys/lm": {label: 'm', commit: 'm'}
+  "preset_keys/ln": {label: 'n', commit: 'n'}
+  "preset_keys/lo": {label: 'o', commit: 'o'}
+  "preset_keys/lp": {label: 'p', commit: 'p'}
+  "preset_keys/lq": {label: 'q', commit: 'q'}
+  "preset_keys/lr": {label: 'r', commit: 'r'}
+  "preset_keys/ls": {label: 's', commit: 's'}
+  "preset_keys/lt": {label: 't', commit: 't'}
+  "preset_keys/lu": {label: 'u', commit: 'u'}
+  "preset_keys/lv": {label: 'v', commit: 'v'}
+  "preset_keys/lw": {label: 'w', commit: 'w'}
+  "preset_keys/lx": {label: 'x', commit: 'x'}
+  "preset_keys/ly": {label: 'y', commit: 'y'}
+  "preset_keys/lz": {label: 'z', commit: 'z'}
+
   # 鍵盤切換鍵
   "preset_keys/Keyboard_maqcodepunct": {label: '符', send: Eisu_toggle, select: maqcodepunct}
   "preset_keys/Keyboard_maqcode":      {label: '返回', send: Eisu_toggle, select: maqcode}
-
-  # EN 鍵：用 Eisu_toggle + select 切換鍵盤
-  # attachKeyboard 內的 commitComposition() 會先清除 preedit 再切換 ascii_mode
-  # 這是目前最穩定的可行方案；
-  # 直接候選字的表現：切換前第一個候選字會上屏，這是 Trime 內建行為
   "preset_keys/SwitchToEn": {label: 'EN', send: Eisu_toggle, select: maqcode_en}
   "preset_keys/SwitchToZh": {label: '中', send: Eisu_toggle, select: maqcode}
 
   # ==============================
   # 快馬主鍵盤（中文模式）
+  # 長按字母 → 直接輸出英文小寫（commit 清除 preedit 後上屏）
   # ==============================
   "preset_keyboards/maqcode":
     name: 快馬
@@ -57,35 +82,35 @@ patch:
       - {click: '8'}
       - {click: '9'}
       - {click: '0', width: 10}
-      - {click: q}
-      - {click: w}
-      - {click: e}
-      - {click: r}
-      - {click: t}
-      - {click: y}
-      - {click: u}
-      - {click: i}
-      - {click: o}
-      - {click: p}
+      - {click: q, long_click: lq}
+      - {click: w, long_click: lw}
+      - {click: e, long_click: le}
+      - {click: r, long_click: lr}
+      - {click: t, long_click: lt}
+      - {click: y, long_click: ly}
+      - {click: u, long_click: lu}
+      - {click: i, long_click: li}
+      - {click: o, long_click: lo}
+      - {click: p, long_click: lp}
       - {click: '-', long_click: '=', hint: '=', width: 10}
-      - {click: a}
-      - {click: s}
-      - {click: d}
-      - {click: f}
-      - {click: g}
-      - {click: h}
-      - {click: j}
-      - {click: k}
-      - {click: l}
+      - {click: a, long_click: la}
+      - {click: s, long_click: ls}
+      - {click: d, long_click: ld}
+      - {click: f, long_click: lf}
+      - {click: g, long_click: lg}
+      - {click: h, long_click: lh}
+      - {click: j, long_click: lj}
+      - {click: k, long_click: lk}
+      - {click: l, long_click: ll}
       - {click: ';'}
       - {click: "'", width: 10}
-      - {click: z}
-      - {click: x}
-      - {click: c}
-      - {click: v}
-      - {click: b}
-      - {click: n}
-      - {click: m}
+      - {click: z, long_click: lz}
+      - {click: x, long_click: lx}
+      - {click: c, long_click: lc}
+      - {click: v, long_click: lv}
+      - {click: b, long_click: lb}
+      - {click: n, long_click: ln}
+      - {click: m, long_click: lm}
       - {click: '/', long_click: cn_comma, hint: '，'}
       - {click: '\', long_click: cn_period, hint: '。'}
       - {click: '['}
